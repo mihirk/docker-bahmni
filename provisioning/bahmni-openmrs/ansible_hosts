@@ -1,0 +1,2 @@
+[bahmni-openmrs]
+localhost   ansible_connection=local

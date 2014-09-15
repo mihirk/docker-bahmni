@@ -1,0 +1,5 @@
+---
+- hosts: bahmni-openmrs
+
+  roles:
+    - yum-packages
