@@ -2,8 +2,8 @@
     "builders": [
         {
             "type": "docker",
-            "image": "centos:centos6",
-            "export_path": "bahmni-openmrs.tar"
+            "image": "mihirk/bahmni:openmrs",
+            "commit": true
         }
     ],
     "provisioners": [
@@ -15,26 +15,17 @@
             "type": "ansible-local",
             "playbook_file": "provisioning/bahmni-openmrs/local.yml",
             "inventory_file": "provisioning/bahmni-openmrs/ansible_hosts",
-            "role_paths": ["provisioning/bahmni-openmrs/roles/yum-packages"],
-            "extra_arguments": ["-vvv"]
-
+            "role_paths": ["provisioning/bahmni-openmrs/roles/yum-packages", "provisioning/bahmni-openmrs/roles/mysql",
+                "provisioning/bahmni-openmrs/roles/tomcat"]
         }
     ],
     "post-processors": [
         [
             {
-                "type": "docker-import",
+                "type": "docker-tag",
                 "repository": "mihirk/bahmni",
                 "tag": "openmrs"
-            },
-            {
-                "type": "docker-push",
-                "login": "true",
-                "login_email": "mihir.khatwani@gmail.com",
-                "login_username": "mihirk",
-                "login_password": "some"
             }
         ]
     ]
-
 }

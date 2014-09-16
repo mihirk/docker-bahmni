@@ -1,3 +1,12 @@
+- name: Add bahmni repo to yum
+  template: src=bahmni.repo.j2 dest=/etc/yum.repos.d/bahmni.repo owner=root group=root mode=0644
+
 - name: Install packages
   yum: name={{ item }} state=present
   with_items: utilities
+
+- name: Copy Java Home setting shell script
+  template: src=java_home.j2 dest=/etc/profile.d/java_home.sh owner=root mode=0644
+
+- name: Copy tools jar to java home directory
+  get_url: url="{{bahmni_servers}}/tools.jar" dest="{{java_home}}/lib/tools.jar" force=no

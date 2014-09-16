@@ -1,0 +1,2 @@
+tomcat_directory: "apache-tomcat-7.0.22"
+tomcat_tar: "{{tomcat_directory}}.tar.gz"

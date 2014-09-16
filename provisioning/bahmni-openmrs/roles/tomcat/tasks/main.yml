@@ -1,0 +1,5 @@
+- name: Download Tomcat Tar
+  get_url: url="{{bahmni_servers}}/{{tomcat_tar}}" dest="/tmp/{{tomcat_tar}}" force=no
+
+- name: Extract tomcat
+  unarchive: src="/tmp/{{tomcat_tar}}" dest="/usr/local/" creates=yes
