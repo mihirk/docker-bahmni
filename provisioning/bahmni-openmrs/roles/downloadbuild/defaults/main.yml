@@ -1,0 +1,4 @@
+artifact: "distro-5.1-SNAPSHOT-distro.zip"
+version: "Latest"
+branch: "master"
+download_url: "https://ci-bahmni.thoughtworks.com/go/files/Bahmni_MRS_{{branch}}/{{version}}/FunctionalTestStage/1/FunctionalTests/deployables/{{artifact}}"

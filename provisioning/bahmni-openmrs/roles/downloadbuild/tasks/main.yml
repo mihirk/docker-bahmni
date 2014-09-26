@@ -1,0 +1,5 @@
+- name: Download artifact
+  get_url: url="{{download_url}}" dest="/tmp/{{artifact}}" force=no
+
+- name: Unzip artifact
+  unarchive: src="/tmp/{{artifact}}" dest="/tmp/" creates=yes

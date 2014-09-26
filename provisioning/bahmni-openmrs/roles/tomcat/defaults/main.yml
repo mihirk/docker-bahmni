@@ -1,2 +1,18 @@
-tomcat_directory: "apache-tomcat-7.0.22"
+tomcat_version: "7.0.22"
+tomcat_directory: "apache-tomcat-{{tomcat_version}}"
 tomcat_tar: "{{tomcat_directory}}.tar.gz"
+tomcat_installation_directory: "/var/lib/"
+tomcat_library_directory: "{{tomcat_installation_directory}}{{tomcat_directory}}/lib"
+tomcat_bin_directory: "{{tomcat_installation_directory}}{{tomcat_directory}}/bin"
+tomcat_conf_directory: "{{tomcat_installation_directory}}{{tomcat_directory}}/conf"
+tomcat_libraries: ["tomcat-juli-adapters.jar", "log4j-1.2.17.jar"]
+tomcat_bin_jars: ["tomcat-juli.jar"]
+tomcat_bin_scripts: ["setenv.sh", "catalina.sh"]
+tomcat_shutdown_port: "8005"
+tomcat_http_port: "8080"
+tomcat_redirect_port: "8443"
+tomcat_ajp_port: "8009"
+tomcat_session_timeout_in_minutes: "120"
+tomcat_manager_username: "tomcat"
+tomcat_manager_password: "p@ssw0rd"
+extra_directories: ["docs", "examples"]

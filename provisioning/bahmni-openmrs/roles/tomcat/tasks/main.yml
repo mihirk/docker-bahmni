@@ -2,4 +2,44 @@
   get_url: url="{{bahmni_servers}}/{{tomcat_tar}}" dest="/tmp/{{tomcat_tar}}" force=no
 
 - name: Extract tomcat
-  unarchive: src="/tmp/{{tomcat_tar}}" dest="/usr/local/" creates=yes
+  unarchive: src="/tmp/{{tomcat_tar}}" dest="{{tomcat_installation_directory}}" creates=yes
+
+- name: Add tomcat libraries
+  get_url: url="{{bahmni_servers}}/{{ item }}" dest="{{tomcat_library_directory}}" force=no
+  with_items: tomcat_libraries
+
+- name: Add tomcat bin jars
+  get_url: url="{{bahmni_servers}}/{{ item }}" dest="{{tomcat_bin_directory}}" force=no
+  with_items: tomcat_bin_jars
+
+- name: Get tomcat bin scripts
+  template: src={{ item }} dest="{{tomcat_bin_directory}}/{{item}}" owner=root mode=0774
+  with_items: tomcat_bin_scripts
+
+- name: Tomcat init script
+  template: src="tomcat.j2" dest="/etc/init.d/tomcat" owner=root mode=0777
+
+- name: Tomcat server xml
+  template: src="server.xml.j2" dest="{{tomcat_conf_directory}}/server.xml" owner=root mode=0664
+
+- name: Tomcat context xml
+  template: src="context.xml.j2" dest="{{tomcat_conf_directory}}/context.xml" owner=root mode=0664
+
+- name: Log4j Properties
+  template: src="log4j.properties" dest="{{tomcat_library_directory}}/log4j.properties" owner=root mode=0664
+
+- name: Remove Logging properties
+  file: path="{{tomcat_conf_directory}}/logging.properties" state=absent
+
+- name: Tomcat web xml
+  template: src="web.xml.j2" dest="{{tomcat_conf_directory}}/web.xml" owner=root mode=0664
+
+- name: Tomcat users xml
+  template: src="tomcat-users.xml.j2" dest="{{tomcat_conf_directory}}/tomcat-users.xml" owner=root mode=0664
+
+- name: Remove docs directory
+  file: path="{{tomcat_installation_directory}}{{tomcat_directory}}/{{item}}" state=absent
+  with_items: extra_directories
+
+- name: Register tomcat as a service
+  command: chkconfig --add /etc/init.d/tomcat

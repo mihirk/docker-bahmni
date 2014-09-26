@@ -1,4 +1,4 @@
-utilities: ["unzip", "zip", "wget", "jdk", "MySQL-shared-compat", "MySQL-shared", "MySQL-client", "MySQL-server"]
+utilities: ["tar", "unzip", "zip", "wget", "jdk", "MySQL-shared-compat", "MySQL-shared", "MySQL-client", "MySQL-server"]
 java_home: "/usr/java/jdk1.7.0_21"
 bahmni_repo: "http://bahmni-repo.twhosted.com"
 bahmni_tools: "{{bahmni_repo}}/tools"
