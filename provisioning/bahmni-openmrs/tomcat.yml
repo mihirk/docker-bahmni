@@ -3,5 +3,4 @@
 
   roles:
     - yum-packages
-    - mysql
     - tomcat

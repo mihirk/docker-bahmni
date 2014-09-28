@@ -1,3 +1,10 @@
+- name: Add bahmni repo to yum
+  template: src=bahmni.repo.j2 dest=/etc/yum.repos.d/bahmni.repo owner=root group=root mode=0644
+
+- name: Install packages
+  yum: name={{ item }} state=present
+  with_items: mysql_packages
+
 - name: Copy Mysql settings
   copy: src="my.cnf" dest="/etc/my.cnf" owner=root mode=0644
 
