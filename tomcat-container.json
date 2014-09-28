@@ -13,9 +13,9 @@
         },
         {
             "type": "ansible-local",
-            "playbook_file": "provisioning/bahmni-openmrs/mysql.yml",
+            "playbook_file": "provisioning/bahmni-openmrs/tomcat.yml",
             "inventory_file": "provisioning/bahmni-openmrs/ansible_hosts",
-            "role_paths": ["provisioning/bahmni-openmrs/roles/mysql"]
+            "role_paths": ["provisioning/bahmni-openmrs/roles/yum-packages", "provisioning/bahmni-openmrs/roles/tomcat"]
         }
     ],
     "post-processors": [
